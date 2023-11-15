@@ -17,7 +17,7 @@ class App {
 
         for (var letter : word.toLowerCase().toCharArray()) {
             var index = tmpText.indexOf(letter);
-            if (index == 0) {
+            if (index == -1) {
                 return false;
             }
             tmpText.remove(index);
