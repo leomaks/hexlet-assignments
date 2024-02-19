@@ -21,23 +21,17 @@ public final class App {
         app.get("/users", ctx -> {
             var term = ctx.queryParam("term");
             UsersPage page;
-
+            List<User> users;
+            
             if (term!=null) {
-                ArrayList<User> users = new ArrayList<>();
-                var filtredUsers = USERS.stream()
+                users = USERS.stream()
                         .filter(user ->StringUtils.startsWithIgnoreCase(user.getFirstName(),(term)))
                         .toList();
-                for (User u: filtredUsers) {
-                    users.add(u);
-                }
-
-                page = new UsersPage(users, term);
-
-
             } else {
-                page = new UsersPage((ArrayList<User>) USERS, term);
+                users = USERS;
             }
 
+            page = new UsersPage(users, term);
             ctx.render("users/index.jte", Collections.singletonMap("page", page));
 
         });

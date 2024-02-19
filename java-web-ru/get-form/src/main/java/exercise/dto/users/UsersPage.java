@@ -10,17 +10,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 @Getter
-@Setter
-@ToString
-
+@AllArgsConstructor
 public class UsersPage {
-    public UsersPage(ArrayList<User> users, String term) {
-        this.users = users;
-        this.term = term;
-    }
-
-    public ArrayList<User> users;
-    public String term;
+    private List<User> users;
+    private String term;
 
 }
 
