@@ -8,13 +8,12 @@ import exercise.repository.UsersRepository;
 
 import exercise.util.Security;
 import io.javalin.http.Context;
-import io.javalin.validation.ValidationException;
 
 public class SessionsController {
 
     public static void build(Context ctx) {
         var page = new LoginPage("");
-        ctx.render("sessions/build.jte", Collections.singletonMap("page", page));
+        ctx.render("build.jte", Collections.singletonMap("page", page));
 
     }
 
@@ -34,7 +33,7 @@ public class SessionsController {
             ctx.redirect("/");
         } else {
             var page = new LoginPage(name, "Wrong username or password");
-            ctx.render("sessions/build.jte", Collections.singletonMap("page", page));
+            ctx.render("build.jte", Collections.singletonMap("page", page));
         }
     }
 
