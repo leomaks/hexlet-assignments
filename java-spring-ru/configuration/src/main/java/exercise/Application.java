@@ -25,12 +25,6 @@ public class Application {
 
 
     // BEGIN
-/*    В конфигурационном файле приложения в свойстве `users.admins` записаны email администраторов нашего ресурса.
-Добавьте в приложение обработчик, который при GET-запросе на адрес
-/admins* вернет список имен администраторов. Список должен быть отсортирован по имени пользователя в прямом порядке.
- */
-
-    // END
 
     @GetMapping("/users")
     public List<User> index() {
@@ -44,22 +38,20 @@ public class Application {
             .findFirst();
         return user;
     }
-
-
-
+    
 
     @GetMapping("/admins")
-    public ArrayList<String> showAdmins() {
+    public List<String> showAdmins() {
        List<String> adminsEmails = adminInfo.getAdmins();
-       var names = new ArrayList<String>();
-       
-       for (var email:adminsEmails) {
-           names.add(users.stream().filter(user -> user.getEmail().contains(email)).findFirst().get().getName());
-       }
 
-       return names;
+       return users.stream()
+               .filter(u->adminsEmails.contains(u.getEmail()))
+               .map(u->u.getName())
+               .sorted()
+               .toList();
+
     }
-
+    // END
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
